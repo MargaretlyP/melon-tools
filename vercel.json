@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/", "destination": "/melon_pricing_v5_svg.html" }]
+}
