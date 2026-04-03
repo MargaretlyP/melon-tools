@@ -38,7 +38,7 @@
 
 <div style="margin-bottom:2rem;">
   <div style="font-size:18px;font-weight:500;margin-bottom:4px;">Melon Manager — porównanie cen</div>
-  <div style="font-size:12px;color:#888;">Dane: lupposystem.com/cennik (mar 2026) + rozmowy z założycielem Melon. Ceny brutto.</div>
+  <div style="font-size:12px;color:#888;">Dane: lupposystem.com/cennik (mar 2026) · activenow.io/cennik (kwi 2026) · Melon Manager. Ceny netto + VAT.</div>
 </div>
 
 <div class="sec">
@@ -81,7 +81,7 @@
     <g id="marker"></g>
     <g id="lbls"></g>
   </svg>
-  <p class="note">ActiveNow nie publikuje cennika. Dane szacunkowe z rozmów z założycielem Melon (mar 2026).</p>
+  <p class="note">Dane ActiveNow: activenow.io/cennik (kwi 2026). Ceny netto.</p>
 </div>
 
 <div class="sec">
@@ -118,10 +118,11 @@
   <div class="seg">
     <div class="seg-hdr" style="background:#EEEDFE;color:#3C3489;">vs ActiveNow</div>
     <div class="args">
-      <div class="arg"><p><strong>Cena:</strong> 100 uczniów → Melon 123 zł vs ActiveNow ~507 zł. Prawie 5× taniej. Roczna oszczędność ~4 600 zł.</p></div>
-      <div class="arg"><p><strong>Progi ryczałtowe:</strong> szkoła ze 160 uczniami płaci jak za 300. W Melonie — za 160. Proste.</p></div>
-      <div class="arg"><p><strong>Transparentność:</strong> ActiveNow ukrywa cennik. Melon ma kalkulator kosztów w panelu — zero niespodzianek.</p></div>
-      <div class="arg"><p><strong>Sami się identyfikują:</strong> szkoły niezadowolone z ActiveNow ujawniają się same odpowiadając na cold email. Gotowy lead.</p></div>
+      <div class="arg"><p><strong>Cena (małe szkoły):</strong> 100 uczniów → Melon 123 zł, ActiveNow 180 zł. 1,5× taniej. Roczna oszczędność 684 zł.</p></div>
+      <div class="arg"><p><strong>Cena (przeskok progowy):</strong> 260 uczniów → Melon 320 zł, ActiveNow 507 zł (próg „do 300"). Różnica 187 zł/mies = 2 244 zł/rok.</p></div>
+      <div class="arg"><p><strong>Progi ryczałtowe:</strong> szkoła ze 105 uczniami płaci jak za 200 (299 zł). W Melonie — 129 zł. Każdy przeskok progu to nagła podwyżka.</p></div>
+      <div class="arg"><p><strong>Kalkulator kosztów:</strong> Melon pokazuje dokładny koszt każdego miesiąca w panelu. ActiveNow — płacisz za próg pojemnościowy bez względu na faktyczne użycie.</p></div>
+      <div class="warn"><p>⚠️ <strong>SMS w cenie:</strong> ActiveNow wlicza limit SMS w plan (100–1 500 SMS/mies zależnie od progu). Melon dolicza 0,17 zł za każdy SMS osobno. Przy częstych odwołaniach — sprawdź realny wolumen przed rozmową.</p></div>
     </div>
   </div>
 
@@ -142,7 +143,7 @@ var CW=W-PAD_L-PAD_R,CH=H-PAD_T-PAD_B,MAX_Y=900;
 
 function mP(n){return Math.round(n*1.23);}
 function lP(n){if(n<=99)return{p:199,t:'0–99'};if(n<=199)return{p:319,t:'100–199'};if(n<=299)return{p:419,t:'200–299'};if(n<=399)return{p:490,t:'300–399'};if(n<=499)return{p:590,t:'400–499'};if(n<=599)return{p:790,t:'500–599'};return{p:890,t:'600–699'};}
-function aP(n){if(n<=50)return{p:125,t:'próg ~50'};if(n<=300)return{p:507,t:'próg ~300'};return{p:860,t:'próg 600+'};}
+function aP(n){if(n<=50)return{p:125,t:'do 50'};if(n<=100)return{p:180,t:'do 100'};if(n<=200)return{p:299,t:'do 200'};if(n<=300)return{p:507,t:'do 300'};if(n<=400)return{p:636,t:'do 400'};if(n<=500)return{p:750,t:'do 500'};return{p:852,t:'do 600'};}
 function xOf(n){return PAD_L+n/600*CW;}
 function yOf(v){return PAD_T+CH-Math.min(v,MAX_Y)/MAX_Y*CH;}
 
@@ -199,7 +200,7 @@ function upd(){
   document.getElementById('lv').textContent=l.p+' zł';
   document.getElementById('ls').textContent='próg '+l.t;
   document.getElementById('av').textContent=a.p+' zł';
-  document.getElementById('as').textContent=a.t+' (est.)';
+  document.getElementById('as').textContent='próg '+a.t;
   var vd=document.getElementById('vd');
   if(m<l.p){
     var dl=l.p-m,da=a.p-m,dlp=Math.round(dl/l.p*100),dap=Math.round(da/a.p*100);
